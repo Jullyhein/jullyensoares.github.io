@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Jullyen Soares — Backend, APIs, integrações e automação.">
+    <meta name="theme-color" content="#f3eadb">
+
+    <title>Jullyen Soares | Portfólio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&family=DM+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bege: #f3eadb;
+            --papel: #fffaf1;
+            --caramelo: #dfc9ab;
+            --marrom: #4a2d22;
+            --escuro: #2d1b16;
+            --terracota: #a65336;
+            --oliva: #78816a;
+            --borda: rgba(74, 45, 34, .18);
+            --sombra: 0 18px 40px rgba(65, 39, 27, .09);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            background: var(--bege);
+            color: var(--escuro);
+            font-family: "DM Sans", sans-serif;
+            line-height: 1.6;
+        }
+
+        body, button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1220px, 100%);
+            margin: auto;
+            padding: 0 28px;
+        }
+
+        /* MENU */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(243, 234, 219, .96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .menu {
+            max-width: 1220px;
+            margin: auto;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--terracota);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            padding: 8px 13px;
+            border-radius: 30px;
+            font-size: .9rem;
+            transition: background .2s, color .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--marrom);
+            color: var(--papel);
+        }
+
+        /* BOTÕES */
+
+        .botao {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 19px;
+            border: 1px solid var(--marrom);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .9rem;
+            transition: transform .2s, background .2s;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            transform: translateY(-3px);
+        }
+
+        .botao-principal {
+            background: var(--marrom);
+            color: var(--papel);
+        }
+
+        .botao-principal:hover {
+            background: var(--terracota);
+        }
+
+        .botao-secundario {
+            background: transparent;
+            color: var(--marrom);
+        }
+
+        /* APRESENTAÇÃO */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 60px;
+            padding-top: 80px;
+            padding-bottom: 85px;
+            min-height: 580px;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            color: var(--terracota);
+            font-family: "DM Mono", monospace;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin: 20px 0;
+        }
+
+        h1 em {
+            color: var(--terracota);
+            font-style: normal;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #654b3e;
+            font-size: 1.1rem;
+        }
+
+        .acoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .foto-principal {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            justify-self: center;
+        }
+
+        .foto-principal img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center 35%;
+            border-radius: 48% 48% 24px 24px;
+            background: var(--caramelo);
+            display: block;
+            box-shadow: var(--sombra);
+        }
+
+        .selo {
+            position: absolute;
+            right: -15px;
+            bottom: 25px;
+            width: 105px;
+            height: 105px;
+            border: 5px solid var(--bege);
+            border-radius: 50%;
+            background: var(--oliva);
+            color: white;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            font-size: .8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            transform: rotate(10deg);
+        }
+
+        /* TECNOLOGIAS */
+
+        .tecnologias {
+            padding: 20px 0;
+            border-top: 1px solid var(--borda);
+            border-bottom: 1px solid var(--borda);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: var(--marrom);
+            font-family: "DM Mono", monospace;
+            font-size: .8rem;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding-top: 85px;
+            padding-bottom: 85px;
+            scroll-margin-top: 75px;
+        }
+
+        .titulo-secao {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-top: 12px;
+            margin-bottom: 25px;
+        }
+
+        .descricao-secao {
+            max-width: 600px;
+            color: #72594b;
+            margin-bottom: 30px;
+        }
+
+        /* SOBRE */
+
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 24px;
+        }
+
+        .frase {
+            background: var(--marrom);
+            color: var(--papel);
+            border-radius: 24px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 300px;
+        }
+
+        .frase h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin: 35px 0;
+        }
+
+        .sobre-texto {
+            background: var(--papel);
+            border: 1px solid var(--borda);
+            border-radius: 24px;
+            padding: 35px;
+        }
+
+        .sobre-texto p {
+            color: #654b3e;
+            margin-bottom: 18px;
+        }
+
+        .habilidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 25px;
+        }
+
+        .habilidades span {
+            background: #f7efe3;
+            border: 1px solid var(--borda);
+            border-radius: 30px;
+            padding: 7px 12px;
+            font-size: .82rem;
+        }
+
+        /* PROJETOS */
+
+        .filtros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .filtro {
+            background: transparent;
+            color: var(--marrom);
+            border: 1px solid var(--borda);
+            border-radius: 30px;
+            padding: 9px 15px;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+
+        .filtro:hover,
+        .filtro[aria-pressed="true"] {
+            background: var(--marrom);
+            color: white;
+        }
+
+        .filtro:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--terracota);
+            outline-offset: 4px;
+        }
+
+        .projetos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .projeto {
+            background: var(--papel);
+            border: 1px solid var(--borda);
+            border-radius: 24px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+            transition: transform .25s, box-shadow .25s;
+        }
+
+        .projeto:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra);
+        }
+
+        .projeto-icone {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .projeto h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .projeto p {
+            color: #72594b;
+            font-size: .93rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: auto;
+            padding: 20px 0;
+        }
+
+        .tags span {
+            background: #f0e4d3;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-family: "DM Mono", monospace;
+            font-size: .7rem;
+        }
+
+        .projeto a {
+            font-weight: 700;
+            text-underline-offset: 4px;
+            margin-top: 5px;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+
+        /* FOTOS: ALÉM DO CÓDIGO */
+
+        .vida-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .vida-foto {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+            border-radius: 26px;
+            background: var(--caramelo);
+            border: 1px solid var(--borda);
+        }
+
+        .vida-foto img {
+            display: block;
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .35s;
+        }
+
+        .vida-foto:hover img {
+            transform: scale(1.035);
+        }
+
+        .vida-legenda {
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            background: rgba(255, 250, 241, .95);
+            padding: 15px 18px;
+            border-radius: 15px;
+            color: var(--marrom);
+        }
+
+        .vida-legenda strong {
+            display: block;
+            font-size: 1rem;
+        }
+
+        .vida-legenda span {
+            display: block;
+            font-size: .85rem;
+            margin-top: 3px;
+            color: #72594b;
+        }
+
+        /* CONTATO */
+
+        .contato-card {
+            background: var(--caramelo);
+            border-radius: 28px;
+            padding: clamp(30px, 6vw, 65px);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .contato-card h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1;
+            margin: 15px 0;
+        }
+
+        .contato-card p {
+            max-width: 500px;
+            color: #654b3e;
+        }
+
+        .contato-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 25px 0;
+            color: #806858;
+            font-size: .85rem;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 950px) {
+            .hero {
+                gap: 35px;
+                grid-template-columns: 1.1fr .9fr;
+            }
+
+            .sobre-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projetos-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contato-card {
+                grid-template-columns: 1fr;
+            }
+
+            .contato-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .menu {
+                padding: 14px 18px;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav {
+                gap: 4px;
+            }
+
+            nav a {
+                padding: 7px 9px;
+                font-size: .8rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 55px;
+                padding-bottom: 55px;
+                gap: 35px;
+            }
+
+            h1 {
+                font-size: clamp(3.5rem, 15vw, 4.5rem);
+            }
+
+            .foto-principal {
+                width: 82%;
+                margin: 0 auto;
+            }
+
+            .selo {
+                right: -12px;
+                width: 90px;
+                height: 90px;
+                font-size: .7rem;
+            }
+
+            section {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .projetos-grid,
+            .vida-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vida-foto img {
+                height: 380px;
+            }
+
+            .contato-links {
+                flex-direction: column;
+            }
+
+            .sobre-texto,
+            .frase {
+                padding: 25px;
+            }
+
+            .acoes .botao {
+                font-size: .82rem;
+                padding: 11px 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body id="inicio">
+
+    <!-- MENU -->
+    <header>
+        <div class="menu">
+            <a class="logo" href="#inicio">jullyen<span>.</span>dev</a>
+
+            <nav aria-label="Navegação principal">
+                <a href="#sobre">Sobre</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#vida">Além do código</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- APRESENTAÇÃO -->
+            <section class="hero">
+                <div>
+                    <span class="etiqueta">Backend • APIs • Integrações</span>
+
+                    <h1>
+                        Oi, eu sou<br>
+                        <em>Jullyen.</em>
+                    </h1>
+
+                    <p>
+                        Transformo problemas complexos em soluções que
+                        conectam sistemas. Desenvolvedora com foco em Python,
+                        Java, APIs REST e integrações corporativas.
+                    </p>
+
+                    <div class="acoes">
+                        <a class="botao botao-principal" href="#projetos">
+                            Explorar projetos ↓
+                        </a>
+
+                        <a class="botao botao-secundario"
+                           href="https://github.com/Jullyhein"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Meu GitHub ↗
+                        </a>
+
+                        <a class="botao botao-secundario"
+                           href="https://www.linkedin.com/in/jullyen/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Meu LinkedIn ↗
+                        </a>
+                    </div>
+                </div>
+
+                <div class="foto-principal">
+                    <!-- FOTO 1: PERFIL -->
+                    <img
+                        src="static/site_02.jpg"
+                        alt="Jullyen Soares, desenvolvedora backend"
+                        fetchpriority="high"
+                        onerror="this.onerror=null; this.src='static/site_02.jpg';"
+                    >
+
+                    <div class="selo">
+                        Construindo<br>
+                        com propósito ✦
+                    </div>
+                </div>
+            </section>
+
+            <!-- TECNOLOGIAS -->
+            <div class="tecnologias" aria-label="Principais tecnologias">
+                <span>✳ Python</span>
+                <span>✳ Java</span>
+                <span>✳ APIs REST</span>
+                <span>✳ SQL</span>
+                <span>✳ Integrações</span>
+            </div>
+
+            <!-- SOBRE MIM -->
+            <section id="sobre">
+                <span class="etiqueta">Um pouco sobre mim</span>
+
+                <h2 class="titulo-secao">
+                    Curiosa por natureza.<br>
+                    Dev por escolha.
+                </h2>
+
+                <p class="descricao-secao">
+                    Gosto de entender como as peças se conectam:
+                    pessoas, sistemas e ideias.
+                </p>
+
+                <div class="sobre-grid">
+                    <article class="frase">
+                        <span>✎ MEU JEITO DE TRABALHAR</span>
+
+                        <h3>
+                            "Código bom resolve o problema e deixa
+                            o próximo passo mais fácil."
+                        </h3>
+
+                        <span>São Paulo, Brasil · Remoto / Híbrido</span>
+                    </article>
+
+                    <article class="sobre-texto">
+                        <p>
+                            Minha trajetória passou pela Engenharia Civil
+                            antes de chegar à tecnologia. Essa mudança
+                            fortaleceu minha capacidade de analisar problemas,
+                            planejar soluções e aprender continuamente.
+                        </p>
+
+                        <p>
+                            Tenho experiência com desenvolvimento backend,
+                            sustentação de aplicações e integração de sistemas.
+                            Trabalho com APIs REST, análise de logs, consultas
+                            SQL, testes de APIs e publicação de aplicações
+                            em diferentes ambientes.
+                        </p>
+
+                        <p>
+                            Também exploro automação e inteligência artificial
+                            para simplificar processos e conectar soluções
+                            de forma eficiente.
+                        </p>
+
+                        <div class="habilidades">
+                            <span>Python</span>
+                            <span>Java</span>
+                            <span>Spring Boot</span>
+                            <span>FastAPI</span>
+                            <span>Flask</span>
+                            <span>REST / JSON / SOAP</span>
+                            <span>SQL Server</span>
+                            <span>MySQL</span>
+                            <span>Git</span>
+                            <span>Linux</span>
+                            <span>Integrações</span>
+                            <span>IA e automação</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- PROJETOS -->
+            <section id="projetos">
+                <span class="etiqueta">Feito com café e curiosidade</span>
+
+                <h2 class="titulo-secao">Projetos em destaque.</h2>
+
+                <p class="descricao-secao">
+                    Projetos e estudos que demonstram minha experiência
+                    com desenvolvimento, APIs e automação.
+                </p>
+
+                <div class="filtros" aria-label="Filtrar projetos">
+                    <button class="filtro"
+                            type="button"
+                            data-filtro="todos"
+                            aria-pressed="true">
+                        Todos
+                    </button>
+
+                    <button class="filtro"
+                            type="button"
+                            data-filtro="backend"
+                            aria-pressed="false">
+                        Backend
+                    </button>
+
+                    <button class="filtro"
+                            type="button"
+                            data-filtro="integracao"
+                            aria-pressed="false">
+                        Integrações
+                    </button>
+
+                    <button class="filtro"
+                            type="button"
+                            data-filtro="automacao"
+                            aria-pressed="false">
+                        Automação
+                    </button>
+                </div>
+
+                <div class="projetos-grid">
+
+                    <article class="projeto"
+                             data-categoria="backend integracao">
+                        <div class="projeto-icone" aria-hidden="true">🔧</div>
+
+                        <h3>Chuks Garage System</h3>
+
+                        <p>
+                            Sistema para oficina com registro de veículos,
+                            checklist de entrada, fotografias e preparação
+                            de relatório para assinatura digital.
+                        </p>
+
+                        <div class="tags">
+                            <span>Java</span>
+                            <span>REST API</span>
+                            <span>PDF</span>
+                        </div>
+
+                        <a href="https://github.com/Jullyhein/chuks_garage_system"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Ver repositório ↗
+                        </a>
+                    </article>
+
+                    <article class="projeto"
+                             data-categoria="backend integracao">
+                        <div class="projeto-icone" aria-hidden="true">🔌</div>
+
+                        <h3>GatewayConnect</h3>
+
+                        <p>
+                            Projeto de estudo para praticar autenticação,
+                            rotas protegidas e acesso a dados em uma API
+                            inspirada em cenários de integração com ServiceNow.
+                        </p>
+
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>FastAPI</span>
+                            <span>SQL Server</span>
+                        </div>
+
+                        <a href="https://github.com/Jullyhein"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Explorar no GitHub ↗
+                        </a>
+                    </article>
+
+                    <article class="projeto"
+                             data-categoria="automacao integracao">
+                        <div class="projeto-icone" aria-hidden="true">⚙️</div>
+
+                        <h3>Automação e integrações</h3>
+
+                        <p>
+                            Estudos com automação de tarefas, consumo de APIs
+                            e uso de inteligência artificial para apoiar
+                            processos e reduzir atividades repetitivas.
+                        </p>
+
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>APIs</span>
+                            <span>IA</span>
+                        </div>
+
+                        <a href="https://github.com/Jullyhein/automationRH"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Ver projetos no GitHub ↗
+                        </a>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- SEGUNDA FOTO: VOCÊ TRABALHANDO NO COMPUTADOR -->
+            <section id="vida">
+                <span class="etiqueta">Além do código</span>
+
+                <h2 class="titulo-secao">
+                    Construindo ideias.<br>
+                    Um passo de cada vez.
+                </h2>
+
+                <p class="descricao-secao">
+                    Tecnologia também é curiosidade, dedicação e espaço
+                    para experimentar. Aqui, um pouco do meu universo.
+                </p>
+
+                <div class="vida-grid">
+                    <article class="vida-foto">
+                        <!-- FOTO 2: DE COSTAS, TRABALHANDO NO PC -->
+                        <img
+                            src="static/site_02.jpg"
+                            alt="Jullyen de costas, trabalhando no computador"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='static/site_02.jpg';"
+                        >
+
+                        <div class="vida-legenda">
+                            <strong>Entre linhas de código e ideias</strong>
+                            <span>Aprender, construir e evoluir.</span>
+                        </div>
+                    </article>
+
+                    <article class="vida-foto">
+                        <!-- SEGUNDA APRESENTAÇÃO DA FOTO DE PERFIL -->
+                        <img
+                            src="static/site_01.jpg"
+                            alt="Retrato de Jullyen Soares"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='static/site_01.jpg';"
+                        >
+
+                        <div class="vida-legenda">
+                            <strong>Minha trajetória, minhas escolhas</strong>
+                            <span>Da Engenharia Civil ao desenvolvimento backend.</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- CONTATO -->
+            <section id="contato">
+                <div class="contato-card">
+                    <div>
+                        <span class="etiqueta">Vamos conversar?</span>
+
+                        <h2>
+                            Tem um desafio<br>
+                            interessante?
+                        </h2>
+
+                        <p>
+                            Estou aberta a oportunidades em desenvolvimento
+                            backend, APIs REST e integração de sistemas.
+                            Vamos construir algo legal?
+                        </p>
+                    </div>
+
+                    <div class="contato-links">
+                        <a class="botao botao-principal"
+                           href="mailto:jullyensoares@hotmail.com">
+                            Enviar e-mail ↗
+                        </a>
+
+                        <a class="botao botao-secundario"
+                           href="https://www.linkedin.com/in/jullyen/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            LinkedIn ↗
+                        </a>
+
+                        <a class="botao botao-secundario"
+                           href="https://github.com/Jullyhein"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            GitHub ↗
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RODAPÉ -->
+            <footer>
+                <span>
+                    © <span id="ano"></span> Jullyen Soares ·
+                    Feito com carinho e café ☕
+                </span>
+
+                <a href="#inicio">Voltar ao topo ↑</a>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        // Atualiza o ano automaticamente.
+        document.getElementById("ano").textContent =
+            new Date().getFullYear();
+
+        // Filtros interativos dos projetos.
+        const botoesFiltro = document.querySelectorAll(".filtro");
+        const projetos = document.querySelectorAll(".projeto");
+
+        botoesFiltro.forEach((botao) => {
+            botao.addEventListener("click", () => {
+                const filtro = botao.dataset.filtro;
+
+                botoesFiltro.forEach((item) => {
+                    item.setAttribute(
+                        "aria-pressed",
+                        String(item === botao)
+                    );
+                });
+
+                projetos.forEach((projeto) => {
+                    const categorias =
+                        projeto.dataset.categoria.split(" ");
+
+                    const mostrar =
+                        filtro === "todos" ||
+                        categorias.includes(filtro);
+
+                    projeto.classList.toggle("oculto", !mostrar);
+                });
+            });
+        });
+
+        // Destaca a seção atualmente visível no menu.
+        const secoes = document.querySelectorAll("main section[id]");
+        const linksMenu = document.querySelectorAll("nav a");
+
+        if ("IntersectionObserver" in window) {
+            const observador = new IntersectionObserver(
+                (entradas) => {
+                    entradas.forEach((entrada) => {
+                        if (entrada.isIntersecting) {
+                            linksMenu.forEach((link) => {
+                                link.classList.toggle(
+                                    "active",
+                                    link.getAttribute("href") ===
+                                    "#" + entrada.target.id
+                                );
+                            });
+                        }
+                    });
+                },
+                {
+                    rootMargin: "-30% 0px -60% 0px"
+                }
+            );
+
+            secoes.forEach((secao) => {
+                observador.observe(secao);
+            });
+        }
+    </script>
+
+</body>
+</html>
