@@ -1,1070 +1,582 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio de Jullyen Soares — Backend, APIs, integrações e automação.">
-    <meta name="theme-color" content="#f3eadb">
-
-    <title>Jullyen Soares | Portfólio</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&family=DM+Mono&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bege: #f3eadb;
-            --papel: #fffaf1;
-            --caramelo: #dfc9ab;
-            --marrom: #4a2d22;
-            --escuro: #2d1b16;
-            --terracota: #a65336;
-            --oliva: #78816a;
-            --borda: rgba(74, 45, 34, .18);
-            --sombra: 0 18px 40px rgba(65, 39, 27, .09);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 100px;
-        }
-
-        body {
-            background: var(--bege);
-            color: var(--escuro);
-            font-family: "DM Sans", sans-serif;
-            line-height: 1.6;
-        }
-
-        body, button, a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        button {
-            font: inherit;
-        }
-
-        img {
-            max-width: 100%;
-        }
-
-        .container {
-            width: min(1220px, 100%);
-            margin: auto;
-            padding: 0 28px;
-        }
-
-        /* MENU */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(243, 234, 219, .96);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--borda);
-        }
-
-        .menu {
-            max-width: 1220px;
-            margin: auto;
-            padding: 16px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            white-space: nowrap;
-        }
-
-        .logo span {
-            color: var(--terracota);
-        }
-
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        nav a {
-            text-decoration: none;
-            padding: 8px 13px;
-            border-radius: 30px;
-            font-size: .9rem;
-            transition: background .2s, color .2s;
-        }
-
-        nav a:hover,
-        nav a.active {
-            background: var(--marrom);
-            color: var(--papel);
-        }
-
-        /* BOTÕES */
-
-        .botao {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 19px;
-            border: 1px solid var(--marrom);
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: .9rem;
-            transition: transform .2s, background .2s;
-            cursor: pointer;
-        }
-
-        .botao:hover {
-            transform: translateY(-3px);
-        }
-
-        .botao-principal {
-            background: var(--marrom);
-            color: var(--papel);
-        }
-
-        .botao-principal:hover {
-            background: var(--terracota);
-        }
-
-        .botao-secundario {
-            background: transparent;
-            color: var(--marrom);
-        }
-
-        /* APRESENTAÇÃO */
-
-        .hero {
-            display: grid;
-            grid-template-columns: 1.1fr .9fr;
-            align-items: center;
-            gap: 60px;
-            padding-top: 80px;
-            padding-bottom: 85px;
-            min-height: 580px;
-        }
-
-        .etiqueta {
-            display: inline-block;
-            color: var(--terracota);
-            font-family: "DM Mono", monospace;
-            font-size: .75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            line-height: 1;
-            letter-spacing: -3px;
-            margin: 20px 0;
-        }
-
-        h1 em {
-            color: var(--terracota);
-            font-style: normal;
-        }
-
-        .hero p {
-            max-width: 600px;
-            color: #654b3e;
-            font-size: 1.1rem;
-        }
-
-        .acoes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 28px;
-        }
-
-        .foto-principal {
-            position: relative;
-            max-width: 400px;
-            width: 100%;
-            justify-self: center;
-        }
-
-        .foto-principal img {
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            object-position: center 35%;
-            border-radius: 48% 48% 24px 24px;
-            background: var(--caramelo);
-            display: block;
-            box-shadow: var(--sombra);
-        }
-
-        .selo {
-            position: absolute;
-            right: -15px;
-            bottom: 25px;
-            width: 105px;
-            height: 105px;
-            border: 5px solid var(--bege);
-            border-radius: 50%;
-            background: var(--oliva);
-            color: white;
-            display: grid;
-            place-items: center;
-            text-align: center;
-            font-size: .8rem;
-            font-weight: 700;
-            line-height: 1.3;
-            transform: rotate(10deg);
-        }
-
-        /* TECNOLOGIAS */
-
-        .tecnologias {
-            padding: 20px 0;
-            border-top: 1px solid var(--borda);
-            border-bottom: 1px solid var(--borda);
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-            color: var(--marrom);
-            font-family: "DM Mono", monospace;
-            font-size: .8rem;
-        }
-
-        /* SEÇÕES */
-
-        section {
-            padding-top: 85px;
-            padding-bottom: 85px;
-            scroll-margin-top: 75px;
-        }
-
-        .titulo-secao {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1.1;
-            margin-top: 12px;
-            margin-bottom: 25px;
-        }
-
-        .descricao-secao {
-            max-width: 600px;
-            color: #72594b;
-            margin-bottom: 30px;
-        }
-
-        /* SOBRE */
-
-        .sobre-grid {
-            display: grid;
-            grid-template-columns: .9fr 1.1fr;
-            gap: 24px;
-        }
-
-        .frase {
-            background: var(--marrom);
-            color: var(--papel);
-            border-radius: 24px;
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 300px;
-        }
-
-        .frase h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 2rem;
-            line-height: 1.2;
-            margin: 35px 0;
-        }
-
-        .sobre-texto {
-            background: var(--papel);
-            border: 1px solid var(--borda);
-            border-radius: 24px;
-            padding: 35px;
-        }
-
-        .sobre-texto p {
-            color: #654b3e;
-            margin-bottom: 18px;
-        }
-
-        .habilidades {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-top: 25px;
-        }
-
-        .habilidades span {
-            background: #f7efe3;
-            border: 1px solid var(--borda);
-            border-radius: 30px;
-            padding: 7px 12px;
-            font-size: .82rem;
-        }
-
-        /* PROJETOS */
-
-        .filtros {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
-        }
-
-        .filtro {
-            background: transparent;
-            color: var(--marrom);
-            border: 1px solid var(--borda);
-            border-radius: 30px;
-            padding: 9px 15px;
-            cursor: pointer;
-            transition: background .2s, color .2s;
-        }
-
-        .filtro:hover,
-        .filtro[aria-pressed="true"] {
-            background: var(--marrom);
-            color: white;
-        }
-
-        .filtro:focus-visible,
-        a:focus-visible {
-            outline: 3px solid var(--terracota);
-            outline-offset: 4px;
-        }
-
-        .projetos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .projeto {
-            background: var(--papel);
-            border: 1px solid var(--borda);
-            border-radius: 24px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            min-height: 320px;
-            transition: transform .25s, box-shadow .25s;
-        }
-
-        .projeto:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--sombra);
-        }
-
-        .projeto-icone {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .projeto h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .projeto p {
-            color: #72594b;
-            font-size: .93rem;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: auto;
-            padding: 20px 0;
-        }
-
-        .tags span {
-            background: #f0e4d3;
-            padding: 5px 8px;
-            border-radius: 5px;
-            font-family: "DM Mono", monospace;
-            font-size: .7rem;
-        }
-
-        .projeto a {
-            font-weight: 700;
-            text-underline-offset: 4px;
-            margin-top: 5px;
-        }
-
-        .oculto {
-            display: none !important;
-        }
-
-        /* FOTOS: ALÉM DO CÓDIGO */
-
-        .vida-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            align-items: stretch;
-        }
-
-        .vida-foto {
-            position: relative;
-            min-width: 0;
-            overflow: hidden;
-            border-radius: 26px;
-            background: var(--caramelo);
-            border: 1px solid var(--borda);
-        }
-
-        .vida-foto img {
-            display: block;
-            width: 100%;
-            height: 440px;
-            object-fit: cover;
-            object-position: center;
-            transition: transform .35s;
-        }
-
-        .vida-foto:hover img {
-            transform: scale(1.035);
-        }
-
-        .vida-legenda {
-            position: absolute;
-            left: 14px;
-            right: 14px;
-            bottom: 14px;
-            background: rgba(255, 250, 241, .95);
-            padding: 15px 18px;
-            border-radius: 15px;
-            color: var(--marrom);
-        }
-
-        .vida-legenda strong {
-            display: block;
-            font-size: 1rem;
-        }
-
-        .vida-legenda span {
-            display: block;
-            font-size: .85rem;
-            margin-top: 3px;
-            color: #72594b;
-        }
-
-        /* CONTATO */
-
-        .contato-card {
-            background: var(--caramelo);
-            border-radius: 28px;
-            padding: clamp(30px, 6vw, 65px);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .contato-card h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1;
-            margin: 15px 0;
-        }
-
-        .contato-card p {
-            max-width: 500px;
-            color: #654b3e;
-        }
-
-        .contato-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* RODAPÉ */
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 25px 0;
-            color: #806858;
-            font-size: .85rem;
-        }
-
-        footer a {
-            text-decoration: none;
-        }
-
-        /* RESPONSIVIDADE */
-
-        @media (max-width: 950px) {
-            .hero {
-                gap: 35px;
-                grid-template-columns: 1.1fr .9fr;
-            }
-
-            .sobre-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projetos-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .contato-card {
-                grid-template-columns: 1fr;
-            }
-
-            .contato-links {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-        }
-
-        @media (max-width: 650px) {
-            .container {
-                padding: 0 18px;
-            }
-
-            .menu {
-                padding: 14px 18px;
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            nav {
-                gap: 4px;
-            }
-
-            nav a {
-                padding: 7px 9px;
-                font-size: .8rem;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-                padding-top: 55px;
-                padding-bottom: 55px;
-                gap: 35px;
-            }
-
-            h1 {
-                font-size: clamp(3.5rem, 15vw, 4.5rem);
-            }
-
-            .foto-principal {
-                width: 82%;
-                margin: 0 auto;
-            }
-
-            .selo {
-                right: -12px;
-                width: 90px;
-                height: 90px;
-                font-size: .7rem;
-            }
-
-            section {
-                padding-top: 60px;
-                padding-bottom: 60px;
-            }
-
-            .projetos-grid,
-            .vida-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .vida-foto img {
-                height: 380px;
-            }
-
-            .contato-links {
-                flex-direction: column;
-            }
-
-            .sobre-texto,
-            .frase {
-                padding: 25px;
-            }
-
-            .acoes .botao {
-                font-size: .82rem;
-                padding: 11px 14px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                transition: none !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfólio de Jullyen Soares — Backend, APIs, integrações e automação.">
+<meta name="theme-color" content="#1C1815">
+<title>Jullyen Soares | Portfólio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Playfair+Display:ital,wght@0,500..900;1,500..900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#1C1815; --paper:#28221E; --surface:#362E28;
+  --bege:#F5EFEB; --muted:#C8BDB2; --caramelo:#A86B43; --terracota:#D8B49A;
+  --borda:rgba(245,239,235,.14);
+  --r-xl:clamp(30px,4.5vw,60px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--bege);font-family:"DM Sans",sans-serif;line-height:1.6;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{max-width:100%;display:block}
+
+/* Texto gradiente dos títulos grandes */
+.grad{
+  background:linear-gradient(180deg,#7C6B5F 0%,#EBDCCD 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.big-title{
+  font-family:"Playfair Display",serif;font-weight:900;text-transform:uppercase;
+  line-height:1;letter-spacing:-.02em;text-align:center;
+  font-size:clamp(3rem,12vw,160px);
+}
+.etiqueta{font-family:"DM Mono",monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--terracota)}
+
+/* Botões */
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;
+  font-weight:600;text-transform:uppercase;letter-spacing:.14em;cursor:pointer;
+  font-size:clamp(.72rem,1.1vw,.9rem);padding:14px 34px;transition:transform .25s,filter .25s,background .25s}
+.botao:hover{transform:translateY(-2px)}
+.botao-principal{color:#fff;border:0;outline:2px solid #fff;outline-offset:-3px;
+  background:linear-gradient(123deg,#2A1F1A 7%,#7A492E 37%,#A86B43 72%,#D8B49A 100%);
+  box-shadow:0 4px 14px rgba(168,107,67,.35),4px 4px 12px rgba(216,180,154,.35) inset}
+.botao-principal:hover{filter:brightness(1.12)}
+.botao-ghost{border:2px solid var(--terracota);color:var(--terracota)}
+.botao-ghost:hover{background:rgba(216,180,154,.12)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translate3d(var(--x,0),var(--y,30px),0);
+  transition:opacity .8s cubic-bezier(.25,.1,.25,1) var(--d,0s),transform .8s cubic-bezier(.25,.1,.25,1) var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;overflow-x:clip;padding:0 clamp(20px,3vw,44px)}
+.topnav{display:flex;justify-content:space-between;padding-top:clamp(20px,2.5vw,32px);
+  position:relative;z-index:30}
+.topnav a{color:var(--bege);text-transform:uppercase;font-weight:500;letter-spacing:.1em;
+  font-size:clamp(.78rem,1.5vw,1.25rem);transition:opacity .2s}
+.topnav a:hover{opacity:.7}
+.hero-eyebrow{margin-top:clamp(22px,4vw,48px);text-align:center;
+  font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.3em;
+  font-size:clamp(.65rem,1.2vw,1rem);color:var(--terracota)}
+.hero h1{
+  font-family:"Playfair Display",serif;font-weight:900;text-transform:uppercase;white-space:nowrap;
+  text-align:center;line-height:1.25;letter-spacing:-.03em;width:100%;
+  padding:0 .08em .12em;
+  font-size:18vw;margin-top:-5vw;
+  position:relative;z-index:15;
+  pointer-events:none;
+}
+.hero-role{
+  text-align:right;
+  padding-right:clamp(13px,5vw,60px);
+  margin-top:-2vw;
+  font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.3em;
+  font-size:clamp(.65rem,1.2vw,1rem);color:var(--terracota);
+  position:relative;z-index:15;
+}
+.hero-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;
+  padding-bottom:clamp(24px,3.4vw,44px);position:relative;z-index:20}
+.hero-bottom p{color:var(--muted);font-weight:300;text-transform:uppercase;letter-spacing:.06em;line-height:1.35;
+  font-size:clamp(.72rem,1.3vw,1.3rem);max-width:clamp(150px,22vw,280px)}
+
+/* Boneca: flutuando, sem moldura */
+.doll-magnet{position:absolute;left:50%;bottom:-8vw;z-index:10;
+  width:clamp(240px,34vw,500px);margin-left:calc(clamp(240px,34vw,500px) / -2);will-change:transform}
+.doll-float{animation:flutuar 6s ease-in-out infinite}
+.doll-float img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));user-select:none;-webkit-user-drag:none}
+@keyframes flutuar{
+  0%,100%{transform:translate3d(0,0,0) rotate(-1deg)}
+  50%{transform:translate3d(6px,-16px,0) rotate(1.2deg)}
+}
+.glow{position:absolute;left:50%;bottom:6%;width:60vw;max-width:760px;aspect-ratio:1;transform:translateX(-50%);
+  background:radial-gradient(closest-side,rgba(168,107,67,.28),transparent);z-index:1;pointer-events:none}
+
+.hero-in{opacity:0;animation:heroIn .9s cubic-bezier(.25,.1,.25,1) forwards;animation-delay:var(--d,0s)}
+@keyframes heroIn{from{opacity:0;transform:translateY(var(--y,30px))}to{opacity:1;transform:none}}
+
+/* ===== MARQUEE ===== */
+.marquee{padding:clamp(80px,9vw,140px) 0 40px;overflow:hidden}
+.row{display:flex;gap:12px;width:max-content;will-change:transform}
+.row + .row{margin-top:12px}
+.tile{flex:none;width:clamp(240px,26vw,380px);height:clamp(130px,15vw,210px);border-radius:24px;
+  padding:22px 26px;display:flex;flex-direction:column;justify-content:space-between;
+  border:1px solid var(--borda);position:relative;overflow:hidden}
+.tile small{font-family:"DM Mono",monospace;letter-spacing:.15em;opacity:.7;font-size:.75rem}
+.tile b{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(1.4rem,2.6vw,2.4rem);line-height:1.05}
+.tile::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.07)}
+.t1{background:linear-gradient(135deg,#28221E,#3b3029)}
+.t2{background:linear-gradient(135deg,#7A492E,#A86B43)}
+.t3{background:linear-gradient(135deg,#D8B49A,#F5EFEB);color:#1C1815}
+.t4{background:linear-gradient(135deg,#362E28,#1F1915)}
+
+/* ===== SOBRE ===== */
+.sobre{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(64px,9vw,100px);padding:100px clamp(20px,4vw,40px);overflow:hidden}
+.sobre-block{display:flex;flex-direction:column;align-items:center;gap:clamp(40px,5vw,64px);position:relative;z-index:2}
+.anim-text{color:var(--bege);font-weight:500;text-align:center;line-height:1.7;max-width:580px;font-size:clamp(1rem,2vw,1.35rem)}
+.anim-text .w{display:inline-block;white-space:nowrap}
+.anim-text .c{opacity:.2}
+.deco{position:absolute;z-index:1;border-radius:28px;display:grid;place-items:center;
+  font-family:"DM Mono",monospace;font-weight:500;color:var(--bege);
+  box-shadow:0 24px 40px rgba(0,0,0,.4);border:1px solid var(--borda)}
+.deco i{display:block;animation:flutuar 7s ease-in-out infinite;font-style:normal}
+.d1{top:5%;left:3%;width:clamp(100px,14vw,200px);aspect-ratio:1;font-size:clamp(1.6rem,4vw,3.4rem);
+  background:linear-gradient(135deg,#7A492E,#A86B43);transform:rotate(-8deg)}
+.d2{bottom:9%;left:8%;width:clamp(86px,11vw,160px);aspect-ratio:1;font-size:clamp(1.1rem,2.4vw,2rem);
+  background:linear-gradient(135deg,#362E28,#28221E);transform:rotate(7deg)}
+.d3{top:6%;right:3%;width:clamp(100px,14vw,200px);aspect-ratio:1;font-size:clamp(1.3rem,3vw,2.6rem);
+  background:linear-gradient(135deg,#D8B49A,#F5EFEB);color:#1C1815;transform:rotate(9deg)}
+.d4{bottom:9%;right:8%;width:clamp(90px,12vw,170px);aspect-ratio:1;font-size:clamp(1.1rem,2.4vw,2rem);
+  background:linear-gradient(135deg,#28221E,#4a3a2f);transform:rotate(-6deg)}
+.d2 i{animation-delay:-2s}.d3 i{animation-delay:-4s}.d4 i{animation-delay:-1s}
+
+.habilidades{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:720px}
+.habilidades span{background:rgba(245,239,235,.04);border:1px solid var(--borda);border-radius:999px;
+  padding:8px 14px;font-size:.85rem;font-family:"DM Mono",monospace}
+
+/* ===== SERVIÇOS ===== */
+.servicos{background:var(--bege);color:#1C1815;border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:clamp(80px,9vw,128px) clamp(20px,4vw,40px) clamp(120px,14vw,200px)}
+.servicos .big-title{margin-bottom:clamp(60px,8vw,110px);color:#1C1815}
+.lista{max-width:1024px;margin:auto}
+.item{display:flex;gap:clamp(20px,4vw,56px);align-items:flex-start;
+  padding:clamp(32px,4vw,48px) 0;border-top:1px solid rgba(28,24,21,.15)}
+.item:last-child{border-bottom:1px solid rgba(28,24,21,.15)}
+.num{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(3rem,10vw,140px);line-height:.9;min-width:1.3em}
+.item h3{font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(1rem,2.2vw,2.1rem);margin-bottom:10px}
+.item p{font-weight:300;opacity:.65;max-width:42rem;line-height:1.65;font-size:clamp(.85rem,1.6vw,1.2rem)}
+
+/* ===== PROJETOS ===== */
+.projetos{background:var(--bg);border-radius:var(--r-xl) var(--r-xl) 0 0;margin-top:calc(var(--r-xl) * -.9);
+  position:relative;z-index:10;padding:clamp(80px,9vw,128px) clamp(16px,3vw,40px) 60px}
+.projetos .big-title{margin-bottom:clamp(40px,6vw,80px)}
+.pwrap{height:88vh;min-height:560px;max-width:1240px;margin:0 auto}
+.pcard{position:sticky;height:min(78vh,640px);min-height:520px;transform-origin:top center;will-change:transform;
+  border:2px solid var(--terracota);border-radius:var(--r-xl);background:var(--bg);
+  padding:clamp(16px,2.4vw,32px);display:flex;flex-direction:column;gap:clamp(12px,1.6vw,22px)}
+.ptop{display:flex;align-items:center;gap:clamp(14px,2.4vw,36px);flex-wrap:wrap}
+.pnum{font-family:"Playfair Display",serif;font-weight:900;line-height:.9;font-size:clamp(3rem,8vw,110px)}
+.pinfo{flex:1;min-width:180px}
+.pinfo small{font-family:"DM Mono",monospace;color:var(--terracota);letter-spacing:.18em;text-transform:uppercase;font-size:.75rem}
+.pinfo h3{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(1.4rem,3vw,2.8rem);line-height:1.1;text-transform:uppercase}
+.pgrid{flex:1;min-height:0;display:grid;grid-template-columns:40fr 60fr;gap:clamp(10px,1.4vw,20px)}
+.pcol{display:grid;grid-template-rows:1fr 1.3fr;gap:clamp(10px,1.4vw,20px);min-height:0}
+.panel{border-radius:clamp(24px,3.4vw,50px);padding:clamp(16px,2.2vw,32px);min-height:0;overflow:hidden;
+  border:1px solid var(--borda);background:var(--paper);display:flex;flex-direction:column;justify-content:center}
+.panel p{color:var(--muted);font-size:clamp(.82rem,1.3vw,1.1rem);line-height:1.6}
+.panel.tags{flex-direction:row;flex-wrap:wrap;gap:8px;align-content:center;align-items:center;background:var(--surface)}
+.panel.tags span{background:rgba(245,239,235,.06);border:1px solid var(--borda);color:var(--terracota);
+  border-radius:999px;padding:6px 14px;font-family:"DM Mono",monospace;font-size:clamp(.7rem,1.1vw,.9rem)}
+.panel.visual{align-items:center;justify-content:center;font-size:clamp(4rem,12vw,10rem);
+  background:radial-gradient(120% 90% at 20% 110%,#A86B43 0,#7A492E 40%,#362E28 100%)}
+.panel.visual i{font-style:normal;animation:flutuar 6s ease-in-out infinite;filter:drop-shadow(0 20px 24px rgba(0,0,0,.4))}
+.visual-img{
+  max-width:90%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  filter:drop-shadow(0 20px 24px rgba(0,0,0,.4));
+  animation:flutuar 6s ease-in-out infinite;
+}
+.pv2{background:radial-gradient(120% 90% at 80% 110%,#D8B49A 0,#A86B43 45%,#28221E 100%)!important}
+.pv3{background:radial-gradient(120% 90% at 50% 120%,#F5EFEB 0,#C8BDB2 20%,#7A492E 70%,#28221E 100%)!important}
+
+/* ===== ALÉM DO CÓDIGO ===== */
+.vida{padding:clamp(80px,9vw,120px) clamp(20px,4vw,40px);max-width:1220px;margin:auto}
+.vida h2{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;letter-spacing:-1px;margin:12px 0 18px}
+.vida > p{color:var(--muted);max-width:600px;margin-bottom:36px}
+.vida-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.vida-foto{position:relative;overflow:hidden;border-radius:var(--r-xl);border:1px solid var(--borda);background:var(--paper)}
+.vida-foto img{width:100%;height:460px;object-fit:cover;transition:transform .6s ease}
+.vida-foto:hover img{transform:scale(1.05)}
+.legenda{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(28,24,21,.88);backdrop-filter:blur(10px);
+  padding:16px 22px;border-radius:22px;border:1px solid var(--borda)}
+.legenda strong{display:block;font-family:"Playfair Display",serif;font-size:1.05rem}
+.legenda span{font-size:.85rem;color:var(--muted)}
+
+/* ===== CONTATO ===== */
+.contato{padding:40px clamp(16px,3vw,40px) 80px;max-width:1240px;margin:auto}
+.contato-card{border:2px solid var(--terracota);border-radius:var(--r-xl);
+  padding:clamp(36px,6vw,80px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px;
+  background:radial-gradient(100% 120% at 50% 130%,rgba(168,107,67,.35),transparent 70%),var(--bg)}
+.contato-card h2{font-family:"Playfair Display",serif;font-weight:900;text-transform:uppercase;
+  font-size:clamp(2.4rem,8vw,6.5rem);line-height:1;letter-spacing:-.02em}
+.contato-card p{max-width:520px;color:var(--muted)}
+.links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;max-width:1240px;margin:auto;
+  padding:30px clamp(16px,3vw,40px);color:var(--muted);font-size:.88rem;border-top:1px solid var(--borda)}
+footer a:hover{color:var(--bege)}
+
+/* ===== MODAL DE E-MAIL ===== */
+.modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px;
+  background:rgba(12,9,7,.7);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.modal.aberto{opacity:1;visibility:visible}
+.modal-box{position:relative;width:min(480px,100%);text-align:center;
+  background:var(--paper);border:2px solid var(--terracota);border-radius:36px;
+  padding:clamp(28px,5vw,44px);display:flex;flex-direction:column;align-items:center;gap:16px;
+  transform:translateY(20px) scale(.97);transition:transform .35s cubic-bezier(.25,.1,.25,1)}
+.modal.aberto .modal-box{transform:none}
+.modal-box h3{font-family:"Playfair Display",serif;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.1}
+.modal-fechar{position:absolute;top:16px;right:18px;background:none;border:0;color:var(--muted);
+  font-size:1.1rem;cursor:pointer;padding:6px;transition:color .2s}
+.modal-fechar:hover{color:var(--bege)}
+.email-linha{width:100%;background:var(--bg);border:1px solid var(--borda);border-radius:999px;
+  padding:14px 20px;font-family:"DM Mono",monospace;font-size:clamp(.8rem,3.4vw,1rem);
+  color:var(--terracota);word-break:break-all;user-select:all}
+.modal-acoes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width:767px){
+  .hero h1{font-size:21vw}
+  .hero{min-height:620px}
+  .hero-role{padding-right:0;text-align:center;letter-spacing:.15em;margin-top:-1vw}
+  .doll-magnet{width:min(78vw,340px);margin-left:calc(min(78vw,340px) / -2)}
+  .hero-bottom .botao{padding:12px 22px}
+  .pgrid{grid-template-columns:1fr;grid-template-rows:auto 120px}
+  .pcol{grid-template-rows:auto auto}
+  .pcard{height:auto;min-height:0}
+  .panel.visual{font-size:3.4rem}
+  .pwrap{height:auto;margin-bottom:24px}
+  .vida-grid{grid-template-columns:1fr}
+  .vida-foto img{height:360px}
+  .item{flex-direction:column;gap:8px}
+  .d2,.d4{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero-in,.reveal{opacity:1!important;transform:none!important}
+}
+</style>
 </head>
-
 <body id="inicio">
 
-    <!-- MENU -->
-    <header>
-        <div class="menu">
-            <a class="logo" href="#inicio">jullyen<span>.</span>dev</a>
-
-            <nav aria-label="Navegação principal">
-                <a href="#sobre">Sobre</a>
-                <a href="#projetos">Projetos</a>
-                <a href="#vida">Além do código</a>
-                <a href="#contato">Contato</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-
-            <!-- APRESENTAÇÃO -->
-            <section class="hero">
-                <div>
-                    <span class="etiqueta">Backend • APIs • Integrações</span>
-
-                    <h1>
-                        Oi, eu sou<br>
-                        <em>Jullyen.</em>
-                    </h1>
-
-                    <p>
-                        Transformo problemas complexos em soluções que
-                        conectam sistemas. Desenvolvedora com foco em Python,
-                        Java, APIs REST e integrações corporativas.
-                    </p>
-
-                    <div class="acoes">
-                        <a class="botao botao-principal" href="#projetos">
-                            Explorar projetos ↓
-                        </a>
-
-                        <a class="botao botao-secundario"
-                           href="https://github.com/Jullyhein"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            Meu GitHub ↗
-                        </a>
-
-                        <a class="botao botao-secundario"
-                           href="https://www.linkedin.com/in/jullyen/"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            Meu LinkedIn ↗
-                        </a>
-                    </div>
-                </div>
-
-                <div class="foto-principal">
-                    <!-- FOTO 1: PERFIL -->
-                    <img
-                        src="static/site_02.jpg"
-                        alt="Jullyen Soares, desenvolvedora backend"
-                        fetchpriority="high"
-                        onerror="this.onerror=null; this.src='static/site_02.jpg';"
-                    >
-
-                    <div class="selo">
-                        Construindo<br>
-                        com propósito ✦
-                    </div>
-                </div>
-            </section>
-
-            <!-- TECNOLOGIAS -->
-            <div class="tecnologias" aria-label="Principais tecnologias">
-                <span>✳ Python</span>
-                <span>✳ Java</span>
-                <span>✳ APIs REST</span>
-                <span>✳ SQL</span>
-                <span>✳ Integrações</span>
-            </div>
-
-            <!-- SOBRE MIM -->
-            <section id="sobre">
-                <span class="etiqueta">Um pouco sobre mim</span>
-
-                <h2 class="titulo-secao">
-                    Curiosa por natureza.<br>
-                    Dev por escolha.
-                </h2>
-
-                <p class="descricao-secao">
-                    Gosto de entender como as peças se conectam:
-                    pessoas, sistemas e ideias.
-                </p>
-
-                <div class="sobre-grid">
-                    <article class="frase">
-                        <span>✎ MEU JEITO DE TRABALHAR</span>
-
-                        <h3>
-                            "Código bom resolve o problema e deixa
-                            o próximo passo mais fácil."
-                        </h3>
-
-                        <span>São Paulo, Brasil · Remoto / Híbrido</span>
-                    </article>
-
-                    <article class="sobre-texto">
-                        <p>
-                            Minha trajetória passou pela Engenharia Civil
-                            antes de chegar à tecnologia. Essa mudança
-                            fortaleceu minha capacidade de analisar problemas,
-                            planejar soluções e aprender continuamente.
-                        </p>
-
-                        <p>
-                            Tenho experiência com desenvolvimento backend,
-                            sustentação de aplicações e integração de sistemas.
-                            Trabalho com APIs REST, análise de logs, consultas
-                            SQL, testes de APIs e publicação de aplicações
-                            em diferentes ambientes.
-                        </p>
-
-                        <p>
-                            Também exploro automação e inteligência artificial
-                            para simplificar processos e conectar soluções
-                            de forma eficiente.
-                        </p>
-
-                        <div class="habilidades">
-                            <span>Python</span>
-                            <span>Java</span>
-                            <span>Spring Boot</span>
-                            <span>FastAPI</span>
-                            <span>Flask</span>
-                            <span>REST / JSON / SOAP</span>
-                            <span>SQL Server</span>
-                            <span>MySQL</span>
-                            <span>Git</span>
-                            <span>Linux</span>
-                            <span>Integrações</span>
-                            <span>IA e automação</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <!-- PROJETOS -->
-            <section id="projetos">
-                <span class="etiqueta">Feito com café e curiosidade</span>
-
-                <h2 class="titulo-secao">Projetos em destaque.</h2>
-
-                <p class="descricao-secao">
-                    Projetos e estudos que demonstram minha experiência
-                    com desenvolvimento, APIs e automação.
-                </p>
-
-                <div class="filtros" aria-label="Filtrar projetos">
-                    <button class="filtro"
-                            type="button"
-                            data-filtro="todos"
-                            aria-pressed="true">
-                        Todos
-                    </button>
-
-                    <button class="filtro"
-                            type="button"
-                            data-filtro="backend"
-                            aria-pressed="false">
-                        Backend
-                    </button>
-
-                    <button class="filtro"
-                            type="button"
-                            data-filtro="integracao"
-                            aria-pressed="false">
-                        Integrações
-                    </button>
-
-                    <button class="filtro"
-                            type="button"
-                            data-filtro="automacao"
-                            aria-pressed="false">
-                        Automação
-                    </button>
-                </div>
-
-                <div class="projetos-grid">
-
-                    <article class="projeto"
-                             data-categoria="backend integracao">
-                        <div class="projeto-icone" aria-hidden="true">🔧</div>
-
-                        <h3>Chuks Garage System</h3>
-
-                        <p>
-                            Sistema para oficina com registro de veículos,
-                            checklist de entrada, fotografias e preparação
-                            de relatório para assinatura digital.
-                        </p>
-
-                        <div class="tags">
-                            <span>Java</span>
-                            <span>REST API</span>
-                            <span>PDF</span>
-                        </div>
-
-                        <a href="https://github.com/Jullyhein/chuks_garage_system"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            Ver repositório ↗
-                        </a>
-                    </article>
-
-                    <article class="projeto"
-                             data-categoria="backend integracao">
-                        <div class="projeto-icone" aria-hidden="true">🔌</div>
-
-                        <h3>GatewayConnect</h3>
-
-                        <p>
-                            Projeto de estudo para praticar autenticação,
-                            rotas protegidas e acesso a dados em uma API
-                            inspirada em cenários de integração com ServiceNow.
-                        </p>
-
-                        <div class="tags">
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                            <span>SQL Server</span>
-                        </div>
-
-                        <a href="https://github.com/Jullyhein"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            Explorar no GitHub ↗
-                        </a>
-                    </article>
-
-                    <article class="projeto"
-                             data-categoria="automacao integracao">
-                        <div class="projeto-icone" aria-hidden="true">⚙️</div>
-
-                        <h3>Automação e integrações</h3>
-
-                        <p>
-                            Estudos com automação de tarefas, consumo de APIs
-                            e uso de inteligência artificial para apoiar
-                            processos e reduzir atividades repetitivas.
-                        </p>
-
-                        <div class="tags">
-                            <span>Python</span>
-                            <span>APIs</span>
-                            <span>IA</span>
-                        </div>
-
-                        <a href="https://github.com/Jullyhein/automationRH"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            Ver projetos no GitHub ↗
-                        </a>
-                    </article>
-
-                </div>
-            </section>
-
-            <!-- SEGUNDA FOTO: VOCÊ TRABALHANDO NO COMPUTADOR -->
-            <section id="vida">
-                <span class="etiqueta">Além do código</span>
-
-                <h2 class="titulo-secao">
-                    Construindo ideias.<br>
-                    Um passo de cada vez.
-                </h2>
-
-                <p class="descricao-secao">
-                    Tecnologia também é curiosidade, dedicação e espaço
-                    para experimentar. Aqui, um pouco do meu universo.
-                </p>
-
-                <div class="vida-grid">
-                    <article class="vida-foto">
-                        <!-- FOTO 2: DE COSTAS, TRABALHANDO NO PC -->
-                        <img
-                            src="static/site_02.jpg"
-                            alt="Jullyen de costas, trabalhando no computador"
-                            loading="lazy"
-                            onerror="this.onerror=null; this.src='static/site_02.jpg';"
-                        >
-
-                        <div class="vida-legenda">
-                            <strong>Entre linhas de código e ideias</strong>
-                            <span>Aprender, construir e evoluir.</span>
-                        </div>
-                    </article>
-
-                    <article class="vida-foto">
-                        <!-- SEGUNDA APRESENTAÇÃO DA FOTO DE PERFIL -->
-                        <img
-                            src="static/site_01.jpg"
-                            alt="Retrato de Jullyen Soares"
-                            loading="lazy"
-                            onerror="this.onerror=null; this.src='static/site_01.jpg';"
-                        >
-
-                        <div class="vida-legenda">
-                            <strong>Minha trajetória, minhas escolhas</strong>
-                            <span>Da Engenharia Civil ao desenvolvimento backend.</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <!-- CONTATO -->
-            <section id="contato">
-                <div class="contato-card">
-                    <div>
-                        <span class="etiqueta">Vamos conversar?</span>
-
-                        <h2>
-                            Tem um desafio<br>
-                            interessante?
-                        </h2>
-
-                        <p>
-                            Estou aberta a oportunidades em desenvolvimento
-                            backend, APIs REST e integração de sistemas.
-                            Vamos construir algo legal?
-                        </p>
-                    </div>
-
-                    <div class="contato-links">
-                        <a class="botao botao-principal"
-                           href="mailto:jullyensoares@hotmail.com">
-                            Enviar e-mail ↗
-                        </a>
-
-                        <a class="botao botao-secundario"
-                           href="https://www.linkedin.com/in/jullyen/"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            LinkedIn ↗
-                        </a>
-
-                        <a class="botao botao-secundario"
-                           href="https://github.com/Jullyhein"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            GitHub ↗
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RODAPÉ -->
-            <footer>
-                <span>
-                    © <span id="ano"></span> Jullyen Soares ·
-                    Feito com carinho e café ☕
-                </span>
-
-                <a href="#inicio">Voltar ao topo ↑</a>
-            </footer>
-
-        </div>
-    </main>
-
-    <script>
-        // Atualiza o ano automaticamente.
-        document.getElementById("ano").textContent =
-            new Date().getFullYear();
-
-        // Filtros interativos dos projetos.
-        const botoesFiltro = document.querySelectorAll(".filtro");
-        const projetos = document.querySelectorAll(".projeto");
-
-        botoesFiltro.forEach((botao) => {
-            botao.addEventListener("click", () => {
-                const filtro = botao.dataset.filtro;
-
-                botoesFiltro.forEach((item) => {
-                    item.setAttribute(
-                        "aria-pressed",
-                        String(item === botao)
-                    );
-                });
-
-                projetos.forEach((projeto) => {
-                    const categorias =
-                        projeto.dataset.categoria.split(" ");
-
-                    const mostrar =
-                        filtro === "todos" ||
-                        categorias.includes(filtro);
-
-                    projeto.classList.toggle("oculto", !mostrar);
-                });
-            });
-        });
-
-        // Destaca a seção atualmente visível no menu.
-        const secoes = document.querySelectorAll("main section[id]");
-        const linksMenu = document.querySelectorAll("nav a");
-
-        if ("IntersectionObserver" in window) {
-            const observador = new IntersectionObserver(
-                (entradas) => {
-                    entradas.forEach((entrada) => {
-                        if (entrada.isIntersecting) {
-                            linksMenu.forEach((link) => {
-                                link.classList.toggle(
-                                    "active",
-                                    link.getAttribute("href") ===
-                                    "#" + entrada.target.id
-                                );
-                            });
-                        }
-                    });
-                },
-                {
-                    rootMargin: "-30% 0px -60% 0px"
-                }
-            );
-
-            secoes.forEach((secao) => {
-                observador.observe(secao);
-            });
+<main>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <nav class="topnav hero-in" style="--y:-20px;--d:0s" aria-label="Navegação principal">
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <div class="hero-eyebrow hero-in" style="--d:.1s">Oi, eu sou</div>
+  <h1 class="grad hero-in" style="--y:40px;--d:.2s">Jullyen</h1>
+  <div class="hero-role hero-in" style="--d:.35s">Especialista Backend • APIs • Integrações</div>
+
+  <div class="glow"></div>
+
+  <div class="hero-bottom">
+    <p class="hero-in" style="--y:20px;--d:.4s">Desenvolvedora que transforma problemas complexos em sistemas que se conectam</p>
+    <a class="botao botao-principal hero-in" style="--y:20px;--d:.55s" href="#contato">Fale comigo</a>
+  </div>
+
+  <!-- Boneca interativa: magnética + flutuando, sem moldura -->
+  <div class="doll-magnet hero-in" id="doll" style="--y:30px;--d:.7s">
+    <div class="doll-float">
+      <img src="static/jullyenboneca.png" alt="Jullyen, desenvolvedora backend"
+           fetchpriority="high" draggable="false"
+           onerror="this.onerror=null;this.src='static/site_02.jpg';">
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<section class="marquee" id="marquee" aria-label="Tecnologias">
+  <div class="row" id="row1"></div>
+  <div class="row" id="row2"></div>
+</section>
+
+<!-- ===== SOBRE ===== -->
+<section class="sobre" id="sobre">
+  <div class="deco d1 reveal" style="--x:-80px;--y:0;--d:.1s"><i>&lt;/&gt;</i></div>
+  <div class="deco d2 reveal" style="--x:-80px;--y:0;--d:.25s"><i>SQL</i></div>
+  <div class="deco d3 reveal" style="--x:80px;--y:0;--d:.15s"><i>{ api }</i></div>
+  <div class="deco d4 reveal" style="--x:80px;--y:0;--d:.3s"><i>.py</i></div>
+
+  <div class="sobre-block">
+    <h2 class="big-title grad reveal">Sobre<br>mim</h2>
+    <p class="anim-text" id="animText">Minha trajetória passou pela Engenharia Civil antes de chegar à tecnologia, e essa mudança fortaleceu meu jeito de analisar problemas, planejar soluções e aprender com autonomia. Hoje trabalho com backend, APIs REST, integração de sistemas, automação e inteligência artificial. Código bom resolve o problema e deixa o próximo passo mais fácil. Vamos construir algo legal juntos!</p>
+    <div class="habilidades reveal">
+      <span>Python</span><span>Java</span><span>Spring Boot</span><span>FastAPI</span><span>Flask</span>
+      <span>REST / JSON / SOAP</span><span>SQL Server</span><span>MySQL</span><span>Git</span><span>Linux</span>
+      <span>Integrações</span><span>IA e automação</span>
+    </div>
+    <a class="botao botao-principal reveal" href="#contato">Vamos conversar</a>
+  </div>
+</section>
+
+<!-- ===== SERVIÇOS ===== -->
+<section class="servicos" id="servicos">
+  <h2 class="big-title reveal">Serviços</h2>
+  <div class="lista">
+    <div class="item reveal" style="--d:0s"><span class="num">01</span><div><h3>Desenvolvimento backend</h3><p>Aplicações robustas em Python e Java, com regras de negócio claras, código organizado e fácil de evoluir.</p></div></div>
+    <div class="item reveal" style="--d:.1s"><span class="num">02</span><div><h3>APIs REST</h3><p>Criação e consumo de APIs com autenticação, rotas protegidas, documentação e testes de ponta a ponta.</p></div></div>
+    <div class="item reveal" style="--d:.2s"><span class="num">03</span><div><h3>Integração de sistemas</h3><p>Conexão entre plataformas corporativas usando REST, JSON e SOAP, para que os dados fluam sem retrabalho.</p></div></div>
+    <div class="item reveal" style="--d:.3s"><span class="num">04</span><div><h3>Automação e IA</h3><p>Fluxos automatizados e uso de inteligência artificial para reduzir tarefas repetitivas e apoiar processos.</p></div></div>
+    <div class="item reveal" style="--d:.4s"><span class="num">05</span><div><h3>Sustentação e análise</h3><p>Análise de logs, consultas SQL, testes de API e publicação de aplicações em diferentes ambientes.</p></div></div>
+  </div>
+</section>
+
+<!-- ===== PROJETOS ===== -->
+<section class="projetos" id="projetos">
+  <h2 class="big-title grad reveal">Projetos</h2>
+
+  <!-- Projeto 01 -->
+  <div class="pwrap"><article class="pcard" data-i="0">
+    <div class="ptop">
+      <span class="pnum grad">01</span>
+      <div class="pinfo"><small>Backend · Integrações</small><h3>Chuks Car Service</h3></div>
+      <a class="botao botao-ghost" href="https://github.com/Jullyhein/chuks_garage_system" target="_blank" rel="noopener noreferrer">Ver repositório</a>
+    </div>
+    <div class="pgrid">
+      <div class="pcol">
+        <div class="panel"><p>Sistema para oficina com registro de veículos, checklist de entrada, fotografias e preparação de relatório para assinatura digital.</p></div>
+        <div class="panel tags"><span>Java</span><span>Spring Boot</span><span>REST API</span><span>PDF</span><span>Firebase DB</span><span>GitHub</span></div>
+      </div>
+      <div class="panel visual">
+        <img src="static/mechanic_animated_light.png" alt="Mecânico animado" class="visual-img">
+      </div>
+    </div>
+  </article></div>
+
+  <!-- Projeto 02 -->
+  <div class="pwrap"><article class="pcard" data-i="1">
+    <div class="ptop">
+      <span class="pnum grad">02</span>
+      <div class="pinfo"><small>Backend · Integrações</small><h3>GatewayConnect</h3></div>
+      <a class="botao botao-ghost" href="https://github.com/Jullyhein" target="_blank" rel="noopener noreferrer">Explorar no GitHub</a>
+    </div>
+    <div class="pgrid">
+      <div class="pcol">
+        <div class="panel"><p>Projeto de estudo para praticar autenticação, rotas protegidas e acesso a dados em uma API inspirada em cenários de integração com ServiceNow.</p></div>
+        <div class="panel tags"><span>Python</span><span>FastAPI</span><span>SQL Server</span></div>
+      </div>
+      <div class="panel visual pv2">
+        <img src="static/mechanical_arm_3d.png" alt="Braço mecânico" class="visual-img">
+      </div>
+    </div>
+  </article></div>
+
+  <!-- Projeto 03 -->
+  <div class="pwrap"><article class="pcard" data-i="2">
+    <div class="ptop">
+      <span class="pnum grad">03</span>
+      <div class="pinfo"><small>Automação · Integrações</small><h3>Automação e integrações</h3></div>
+      <a class="botao botao-ghost" href="https://github.com/Jullyhein/automationRH" target="_blank" rel="noopener noreferrer">Ver no GitHub</a>
+    </div>
+    <div class="pgrid">
+      <div class="pcol">
+        <div class="panel"><p>Estudos com automação de tarefas, consumo de APIs e uso de inteligência artificial para apoiar processos e reduzir atividades repetitivas.</p></div>
+        <div class="panel tags"><span>Python</span><span>APIs</span><span>IA</span></div>
+      </div>
+      <div class="panel visual pv3"><i>⚙️</i></div>
+    </div>
+  </article></div>
+
+  <!-- Projeto 04 -->
+  <div class="pwrap"><article class="pcard" data-i="3">
+    <div class="ptop">
+      <span class="pnum grad">04</span>
+      <div class="pinfo"><small>Backend · Inteligência Artificial</small><h3>IA Training</h3></div>
+      <a class="botao botao-ghost" href="https://github.com/Jullyhein/Iatrainning" target="_blank" rel="noopener noreferrer">Explorar no GitHub</a>
+    </div>
+    <div class="pgrid">
+      <div class="pcol">
+        <div class="panel"><p>Assistente de inteligência artificial desenvolvido para responder perguntas com base em documentos de conhecimento da SolarGroup. O projeto reúne uma interface conversacional, recuperação de trechos relevantes de PDFs e uma API para consulta.</p></div>
+        <div class="panel tags"><span>Python</span><span>LangChain</span><span>Ollama</span><span>FastAPI</span><span>Uvicorn</span><span>FAISS</span><span>Streamlit</span></div>
+      </div>
+      <div class="panel visual pv2">
+        <img src="static/brain_animated.png" alt="Cérebro animado" class="visual-img">
+      </div>
+    </div>
+  </article></div>
+</section>
+
+<!-- ===== ALÉM DO CÓDIGO ===== -->
+<section class="vida" id="vida">
+  <span class="etiqueta">Além do código</span>
+  <h2>Construindo ideias.<br>Um passo de cada vez.</h2>
+  <p>Tecnologia também é curiosidade, dedicação e espaço para experimentar. Aqui, um pouco do meu universo.</p>
+  <div class="vida-grid">
+    <article class="vida-foto reveal">
+      <img src="static/site_02.jpg" alt="Jullyen trabalhando no computador" loading="lazy">
+      <div class="legenda"><strong>Entre linhas de código e ideias</strong><span>Aprender, construir e evoluir.</span></div>
+    </article>
+    <article class="vida-foto reveal" style="--d:.12s">
+      <img src="static/site_01.jpg" alt="Retrato de Jullyen Soares" loading="lazy">
+      <div class="legenda"><strong>Minha trajetória, minhas escolhas</strong><span>Da Engenharia Civil ao desenvolvimento backend.</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== CONTATO ===== -->
+<section class="contato" id="contato">
+  <div class="contato-card reveal">
+    <span class="etiqueta">Vamos conversar?</span>
+    <h2 class="grad">Tem um desafio interessante?</h2>
+    <p>Estou aberta a oportunidades em desenvolvimento backend, APIs REST e integração de sistemas.</p>
+    <div class="links">
+      <button type="button" class="botao botao-principal" id="abrirEmail">Enviar e-mail</button>
+      <a class="botao botao-ghost" href="https://www.linkedin.com/in/jullyen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <a class="botao botao-ghost" href="https://github.com/Jullyhein" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>© <span id="ano"></span> Jullyen Soares · São Paulo, Brasil</span>
+  <a href="#inicio">Voltar ao topo ↑</a>
+</footer>
+
+<!-- ===== CAIXINHA DE E-MAIL ===== -->
+<div class="modal" id="modalEmail" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <button type="button" class="modal-fechar" id="fecharEmail" aria-label="Fechar">✕</button>
+    <span class="etiqueta">Vamos conversar?</span>
+    <h3 id="modalTitulo">Meu e-mail</h3>
+    <div class="email-linha">
+      <span id="emailTexto">jullyensoares@hotmail.com</span>
+    </div>
+    <div class="modal-acoes">
+      <button type="button" class="botao botao-principal" id="copiarEmail">Copiar e-mail</button>
+      <a class="botao botao-ghost" href="mailto:jullyensoares@hotmail.com">Abrir no app de e-mail</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  /* ---------- Reveal ao entrar na tela ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin:'50px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- Boneca magnética ---------- */
+  const doll = document.getElementById('doll');
+  const PAD = 150, STRENGTH = 3;
+  let active = false;
+  if (!reduce && matchMedia('(hover:hover)').matches){
+    window.addEventListener('mousemove', e => {
+      const r = doll.getBoundingClientRect();
+      const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      const dx = Math.abs(cx - e.clientX), dy = Math.abs(cy - e.clientY);
+      const near = dx < r.width/2 + PAD && dy < r.height/2 + PAD;
+      if (near){
+        if (!active){ active = true; doll.style.transition = 'transform .3s ease-out'; }
+        doll.style.transform = `translate3d(${(e.clientX - cx)/STRENGTH}px,${(e.clientY - cy)/STRENGTH}px,0)`;
+      } else if (active){
+        active = false; doll.style.transition = 'transform .6s ease-in-out';
+        doll.style.transform = 'translate3d(0,0,0)';
+      }
+    }, { passive:true });
+  }
+
+  /* ---------- Marquee ---------- */
+  const techs = ['Python','Java','Spring Boot','FastAPI','Flask','APIs REST','JSON','SOAP','SQL Server','MySQL','Git',
+                 'Linux','Integrações','IA','Automação','Análise de logs','Testes de API','Deploy','ServiceNow','PDF','Docker'];
+  const skins = ['t1','t2','t3','t4'];
+  const mk = (list, start) => list.map((t,i) =>
+    `<div class="tile ${skins[(i+start)%4]}"><small>${String(i+start+1).padStart(2,'0')} / STACK</small><b>${t}</b></div>`).join('');
+  const html1 = mk(techs.slice(0,11),0), html2 = mk(techs.slice(11),11);
+  const row1 = document.getElementById('row1'), row2 = document.getElementById('row2');
+  row1.innerHTML = html1+html1+html1;
+  row2.innerHTML = html2+html2+html2;
+  const marquee = document.getElementById('marquee');
+
+  /* ---------- Texto que acende letra por letra ---------- */
+  const at = document.getElementById('animText');
+  const text = at.textContent.trim();
+  at.setAttribute('aria-label', text);
+  at.innerHTML = text.split(' ').map(w =>
+    `<span class="w" aria-hidden="true">${[...w].map(c => `<span class="c">${c}</span>`).join('')}</span>`).join(' ');
+  const chars = at.querySelectorAll('.c'), N = chars.length;
+
+  /* ---------- Cards empilhados ---------- */
+  const wraps = [...document.querySelectorAll('.pwrap')];
+  const cards = wraps.map(w => w.querySelector('.pcard'));
+  const stickyTop = i => (innerWidth < 768 ? 84 : 120) + i*28;
+  cards.forEach((c,i) => c.style.top = stickyTop(i) + 'px');
+
+  function update(){
+    const vh = innerHeight, sy = scrollY;
+
+    // marquee
+    const mTop = marquee.getBoundingClientRect().top + sy;
+    const off = (sy - mTop + vh) * 0.3;
+    const W1 = row1.scrollWidth/3, W2 = row2.scrollWidth/3;
+    row1.style.transform = `translate3d(${-W1 + off - 200}px,0,0)`;
+    row2.style.transform = `translate3d(${-W2 - (off - 200)}px,0,0)`;
+
+    // texto animado
+    const r = at.getBoundingClientRect();
+    const p = clamp((vh*0.8 - r.top)/(vh*0.6 + r.height), 0, 1);
+    const win = 10;
+    for (let i=0;i<N;i++){
+      chars[i].style.opacity = (0.2 + 0.8*clamp((p*(N+win) - i)/win, 0, 1)).toFixed(3);
+    }
+
+    // cards empilhados
+    if (innerWidth >= 768){
+      cards.forEach((c,i) => {
+        let s = 1;
+        for (let j=i+1;j<wraps.length;j++){
+          const top = wraps[j].getBoundingClientRect().top;
+          const q = clamp(1 - (top - stickyTop(j))/(vh*0.85), 0, 1);
+          s -= 0.03*q;
         }
-    </script>
+        c.style.transform = `scale(${s.toFixed(4)})`;
+      });
+    } else cards.forEach(c => c.style.transform = 'none');
+  }
+  let tick = false;
+  const onScroll = () => { if (!tick){ tick = true; requestAnimationFrame(() => { update(); tick = false; }); } };
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', () => { cards.forEach((c,i) => c.style.top = stickyTop(i)+'px'); onScroll(); });
+  document.fonts && document.fonts.ready.then(onScroll);
+  update();
 
+  /* ---------- Caixinha de e-mail ---------- */
+  const modal = document.getElementById('modalEmail');
+  const btnCopiar = document.getElementById('copiarEmail');
+  const emailTxt = document.getElementById('emailTexto').textContent.trim();
+  let timerCopiar;
+
+  const abrirModal = () => { modal.classList.add('aberto'); modal.setAttribute('aria-hidden','false'); };
+  const fecharModal = () => { modal.classList.remove('aberto'); modal.setAttribute('aria-hidden','true'); };
+
+  document.getElementById('abrirEmail').addEventListener('click', abrirModal);
+  document.getElementById('fecharEmail').addEventListener('click', fecharModal);
+  modal.addEventListener('click', e => { if (e.target === modal) fecharModal(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
+
+  btnCopiar.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(emailTxt);
+    } catch {
+      const t = document.createElement('textarea');
+      t.value = emailTxt; document.body.appendChild(t); t.select();
+      document.execCommand('copy'); t.remove();
+    }
+    btnCopiar.textContent = 'Copiado ✓';
+    clearTimeout(timerCopiar);
+    timerCopiar = setTimeout(() => btnCopiar.textContent = 'Copiar e-mail', 2000);
+  });
+})();
+</script>
 </body>
 </html>
