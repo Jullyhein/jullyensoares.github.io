@@ -233,26 +233,152 @@ footer a:hover{color:var(--bege)}
 .modal-acoes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
 
 /* ===== RESPONSIVO ===== */
-@media (max-width:767px){
-  .hero h1{font-size:21vw}
-  .hero{min-height:620px}
-  .hero-role{padding-right:0;text-align:center;letter-spacing:.15em;margin-top:-1vw}
-  .doll-magnet{width:min(78vw,340px);margin-left:calc(min(78vw,340px) / -2)}
-  .hero-bottom .botao{padding:12px 22px}
-  .pgrid{grid-template-columns:1fr;grid-template-rows:auto 120px}
-  .pcol{grid-template-rows:auto auto}
-  .pcard{height:auto;min-height:0}
-  .panel.visual{font-size:3.4rem}
-  .pwrap{height:auto;margin-bottom:24px}
-  .vida-grid{grid-template-columns:1fr}
-  .vida-foto img{height:360px}
-  .item{flex-direction:column;gap:8px}
-  .d2,.d4{display:none}
+
+/* Tablets (768px a 1024px) */
+@media (min-width:768px) and (max-width:1024px){
+  .hero h1{font-size:17vw}
+  .doll-magnet{
+    width:clamp(260px,44vw,420px);
+    margin-left:calc(clamp(260px,44vw,420px) / -2);
+    bottom:-4vw;
+  }
+  .hero-role{padding-left:30vw;letter-spacing:.2em}
+  .pcard{height:auto;min-height:520px}
+  .vida-foto img{height:380px}
+  .links .botao{flex:1 1 auto}
 }
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .hero-in,.reveal{opacity:1!important;transform:none!important}
+
+/* Celulares (até 767px) */
+@media (max-width:767px){
+  :root{--r-xl:28px}
+  .botao{padding:13px 22px;letter-spacing:.1em}
+  .big-title{font-size:clamp(2.4rem,13vw,4rem)}
+
+  /* ----- HERO ----- */
+  .hero{height:auto;min-height:100svh;padding:0 20px}
+  .topnav a{font-size:.72rem;letter-spacing:.06em}
+  .hero-eyebrow{margin-top:28px;font-size:.65rem;letter-spacing:.25em}
+  .hero h1{font-size:19vw;margin-top:-3vw}
+  .hero-role{
+    text-align:right;
+    padding:0 0 0 34vw;
+    margin-top:0;
+    letter-spacing:.1em;
+    line-height:1.5;
+    font-size:.65rem;
+  }
+  .doll-magnet{
+    position:relative;
+    left:auto;bottom:auto;
+    order:5;
+    align-self:center;
+    width:min(72vw,320px);
+    margin:20px 0 0;
+  }
+  .hero-bottom{
+    margin-top:0 !important;
+    position:relative !important;
+    top: 85px !important;      /* aumente para descer mais: 70px, 90px... */
+    padding-bottom:90px !important;  /* abre espaço embaixo, para o botão não ser cortado */
+  }
+  .hero-bottom p{max-width:none;font-size:.8rem}
+  .hero-bottom .botao{width:100%}
+  .glow{bottom:22%;width:100vw}
+
+  /* ----- MARQUEE ----- */
+  .marquee{padding:60px 0 30px}
+  .tile{width:200px;height:120px;padding:16px 18px;border-radius:20px}
+  .tile b{font-size:1.3rem}
+
+/* Boneca entra no fluxo, abaixo do cargo */
+.doll-magnet{
+  position:relative;
+  left:auto;
+  bottom:auto;
+  order:5;
+  align-self:center;
+  width:min(68vw,300px);
+  margin:6vw 0 0 0;
+}
+
+/* Texto + botão ficam embaixo da boneca, sem cobrir */
+.hero-bottom{
+  order:6;
+  margin: top 60;
+  flex-direction:column;
+  align-items:stretch;
+  gap:16px;
+  padding-bottom:32px;
+}
+.hero-bottom p{max-width:none}
+.hero-bottom .botao{padding:12px 22px}
+
+.glow{bottom:30%;width:90vw}
+
+  /* ----- SOBRE ----- */
+  .sobre{padding:90px 20px 70px;gap:48px;min-height:auto}
+  .d2,.d4{display:none}
+  .d1,.d3{width:64px;font-size:1.1rem;border-radius:18px;opacity:.35}
+  .d1{top:3%;left:4%}
+  .d3{top:3%;right:4%}
+  .anim-text{font-size:1rem}
+  .habilidades{gap:8px}
+  .habilidades span{font-size:.75rem;padding:6px 12px}
+
+  /* ----- SERVIÇOS ----- */
+  .servicos{padding:70px 20px 100px}
+  .servicos .big-title{margin-bottom:40px}
+  .item{flex-direction:column;gap:6px;padding:28px 0}
+  .num{font-size:3rem;min-width:0}
+  .item h3{font-size:1.05rem}
+  .item p{font-size:.9rem}
+
+  /* ----- PROJETOS ----- */
+  .projetos{padding:70px 16px 40px}
+  .pwrap{height:auto;min-height:0;margin-bottom:20px}
+  .pcard{position:relative;top:auto!important;height:auto;min-height:0;padding:18px;gap:14px}
+  .ptop{gap:10px}
+  .pnum{font-size:3rem}
+  .pinfo{min-width:0;flex:1 1 0}
+  .pinfo h3{font-size:1.25rem}
+  .ptop .botao{width:100%}
+  .pgrid{grid-template-columns:1fr;grid-template-rows:auto 220px}
+  .pcol{grid-template-rows:auto auto}
+  .panel{padding:18px;border-radius:26px}
+  .panel p{font-size:.88rem}
+  .panel.tags span{font-size:.7rem;padding:5px 11px}
+  .panel.visual{font-size:4rem}
+  .visual-img{max-height:190px}
+
+  /* ----- ALÉM DO CÓDIGO ----- */
+  .vida{padding:70px 20px}
+  .vida-grid{grid-template-columns:1fr;gap:18px}
+  .vida-foto img{height:340px}
+  .legenda{left:12px;right:12px;bottom:12px;padding:12px 16px}
+
+  /* ----- CONTATO ----- */
+  .contato{padding:20px 16px 60px}
+  .contato-card{padding:36px 20px;gap:20px}
+  .contato-card h2{font-size:clamp(1.8rem,9vw,2.6rem)}
+  .links{flex-direction:column;width:100%}
+  .links .botao{width:100%}
+
+  /* ----- MODAL ----- */
+  .modal-box{padding:28px 20px;border-radius:28px}
+  .modal-acoes{flex-direction:column;width:100%}
+  .modal-acoes .botao{width:100%}
+
+  /* ----- RODAPÉ ----- */
+  footer{flex-direction:column;align-items:center;text-align:center;padding:24px 20px}
+}
+
+/* Celulares pequenos (até 380px) */
+@media (max-width:380px){
+  .hero h1{font-size:18vw}
+  .hero-role{padding-left:26vw;font-size:.6rem}
+  .doll-magnet{width:66vw}
+  .botao{font-size:.7rem}
+  .pgrid{grid-template-rows:auto 190px}
 }
 </style>
 </head>
